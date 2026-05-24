@@ -20,6 +20,7 @@
         android:id="@+id/dialog_settings_horover_type"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:orientation="horizontal">
         <RadioButton android:id="@+id/regions"
             android:layout_width="wrap_content"
@@ -53,6 +54,7 @@
         android:id="@+id/dialog_settings_mei_type"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:orientation="horizontal">
         <RadioButton android:id="@+id/dialog_settings_annotation_type_orthogonal"
             android:layout_width="wrap_content"
@@ -78,15 +80,33 @@
 
     <CheckBox
         android:id="@+id/upbeat"
+        android:layout_marginStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upbeat" />
 
     <CheckBox
         android:id="@+id/annot"
+        android:layout_marginStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Annotation" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Deep Optical Measure Detector URL" />
+
+    <EditText
+        android:id="@+id/domdUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_marginStart="10dp" />
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"

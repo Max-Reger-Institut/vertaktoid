@@ -109,7 +109,7 @@ public class FacsimileView extends CoordinatorLayout {
     public final ObservableInt maxPageNumber = new ObservableInt(0);
     public boolean needToSave = false;
 
-
+    private String domdUrl;
 
     public enum Action {DRAW, DRAW2, ERASE, ADJUST_MEASURE, ORTHOGONAL_CUT, PRECISE_CUT, IIIF_ZOOM, ADJUST_MOVEMENT;
     }
@@ -268,6 +268,11 @@ public class FacsimileView extends CoordinatorLayout {
         final RadioGroup settingsMEIType = (RadioGroup) settingsDialog.findViewById(R.id.dialog_settings_mei_type);
         final CheckBox upbeat = (CheckBox) settingsDialog.findViewById(R.id.upbeat);
         final CheckBox annot = (CheckBox) settingsDialog.findViewById(R.id.annot);
+        final EditText domdUrlInput = (EditText) settingsDialog.findViewById(R.id.domdUrl);
+        final String defaultDomdUrl = "https://measure-detector.max-reger-institut.de/upload";
+        domdUrlInput.setHint(defaultDomdUrl);
+        domdUrlInput.setText(defaultDomdUrl);
+        domdUrlInput.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
 
 
 
@@ -328,6 +333,15 @@ public class FacsimileView extends CoordinatorLayout {
                     } else if (settingsMEIType.getCheckedRadioButtonId() == R.id.dialog_settings_annotation_type_polygon) {
                         document.nextAnnotationsType = Facsimile.AnnotationType.POLYGON;
                     }
+
+                    String actualDomdUrl = domdUrlInput.getText().toString();
+                    if (!actualDomdUrl.equals("")) {
+                        domdUrl = actualDomdUrl;
+                    } else {
+                        domdUrl = defaultDomdUrl;
+                    }
+                    domdUrlInput.setText(domdUrl);
+
                 } catch (NumberFormatException e) {
                     // do nothing
                 }
@@ -550,7 +564,7 @@ public class FacsimileView extends CoordinatorLayout {
                                                 new File(paths[i])))
                                 .build();
                         Request request = new Request.Builder()
-                                .url("https://measure-detector.edirom.de/upload")
+                                .url(domdUrl)
                                 .method("POST", body)
                                 .addHeader("method", "post")
                                 .addHeader("path", "/upload")
